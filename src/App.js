@@ -4,14 +4,16 @@ import STORE from './STORE'
 import Folder from './Components/Folder'
 import Header from './Components/Header'
 import Main from './Components/Main'
+import GoBackButton from './Components/GoBackButton'
 import './App.css'
 
 class App extends React.Component{
     state = {
-        STORE
+        folders: STORE.folders,
+        notes: STORE.notes
     }
     
-    render(){    
+    render(){
         return(
             <div className="App">
                 <Route
@@ -22,20 +24,36 @@ class App extends React.Component{
                         exact path="/"
                         render={() => <div className="navFlex">
                         <Folder
-                        STORE={this.state.STORE}
+                        folders={this.state.folders}
+                        notes={this.state.notes}
                         />
-                        <Main STORE={this.state.STORE}/>
+                        <Main folders={this.state.folders}
+                            notes={this.state.notes}
+                        />
                         </div>}
                 />
                 <Route 
                         exact path="/folder/:folderId"
-                        render={() => <div className="navFlex">
+                        render={() => 
+                        <div className="navFlex">
                         <Folder
-                        STORE={this.state.STORE}
+                        folders={this.state.folders}
+                        notes={this.state.notes}
                         />
-                        <Main STORE={this.state.STORE}/>
+                        <Main folders={this.state.folders}
+                            notes={this.state.notes}
+                        />
                         </div>}
                 />
+                <Route 
+                    exact path="/note/:noteId"
+                    render={() => 
+                        <div className="navFlex">
+                            <GoBackButton/>
+                            <Main />
+                        </div>
+                    }
+                    />
                 </div>
         )
     }

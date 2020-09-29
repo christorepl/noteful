@@ -6,21 +6,24 @@ class Folder extends React.Component {
     render(){
 
         let folderID = this.props.match.params.folderId
-        console.log(folderID)
 
-        const folderNames = this.props.STORE.folders.map(folder => { console.log(folder)
+        const folderNames = this.props.folders.map(folder => {
             return (
-                <div>
+                <div key={folder.id}>
                 <Link to={`/folder/${folder.id}`}>
-                    <p className="navBarTile" key={folder.id}>
+                    <p className={`navBarTile ${folder.id === folderID ? 'highlight' : null}`}>
                         {folder.name}
                     </p>
                 </Link>
                 </div>
             )
         })
+
+
     return(
-        <div>{folderNames}</div>
+        <div>
+            {folderNames}
+        </div>
     )
     }
 }
