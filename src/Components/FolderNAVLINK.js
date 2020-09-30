@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 
 class Folder extends React.Component {
     render(){
@@ -9,14 +9,15 @@ class Folder extends React.Component {
         const folderNames = this.props.folders.map(folder => {
             return (
                 <div key={folder.id}>
-                <Link to={`/folder/${folder.id}`}>
-                    <p className={`navBarTile ${folder.id === folderID ? 'highlight' : null}`}>
-                    {folder.name}
+                <NavLink to={`/folder/${folder.id}`}>
+                    <p className='navBarTile'>
+                        {folder.name}
                     </p>
-                </Link>
+                </NavLink>
                 </div>
             )
         })
+
 
     return(
         <div>

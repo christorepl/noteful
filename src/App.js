@@ -4,6 +4,7 @@ import STORE from './STORE'
 import Folder from './Components/Folder'
 import Header from './Components/Header'
 import Main from './Components/Main'
+import MainNote from './Components/MainNote'
 import GoBackButton from './Components/GoBackButton'
 import './App.css'
 
@@ -25,7 +26,7 @@ class App extends React.Component{
                         render={() => <div className="navFlex">
                         <Folder
                         folders={this.state.folders}
-                        notes={this.state.notes}
+                        // notes={this.state.notes}
                         />
                         <Main folders={this.state.folders}
                             notes={this.state.notes}
@@ -38,7 +39,6 @@ class App extends React.Component{
                         <div className="navFlex">
                         <Folder
                         folders={this.state.folders}
-                        notes={this.state.notes}
                         />
                         <Main folders={this.state.folders}
                             notes={this.state.notes}
@@ -49,8 +49,13 @@ class App extends React.Component{
                     exact path="/note/:noteId"
                     render={() => 
                         <div className="navFlex">
-                            <GoBackButton/>
-                            <Main />
+                            <GoBackButton
+                                folders={this.state.folders}
+                                notes={this.state.notes}
+                            />
+                            <MainNote
+                                notes={this.state.notes}
+                            />
                         </div>
                     }
                     />

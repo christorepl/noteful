@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 const Main = (props) => {
 
@@ -18,19 +18,23 @@ const Main = (props) => {
     const note = notes.map(note => {
         return (
             <div className="noteSelection" key={note.id}>
-                <li>
-                    <h1>{note.name}</h1>
-                    <p>Last modified: {note.modified}</p>
-                    <button type="button">Don't click me yet</button>
-                </li>
+                <Link to={`/note/${note.id}`}>
+                    <li>
+                        <h1>{note.name}</h1>
+                        <p>Last modified: {note.modified}</p>
+                        <button type="button">Don't click me yet</button>
+                    </li>
+                </Link>
             </div>
         )
     })
 
     return(
-        <div>{note}</div>
+        <div>
+        {note}
+        <button type="button">Add note</button>
+        </div>
     )
 }
 
-//folderId = null, then render all notes
 export default withRouter(Main)

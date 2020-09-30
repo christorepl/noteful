@@ -1,16 +1,23 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
-class GoBackButton extends React.Component {
+
+class MainNote extends React.Component {
     render(){
-        return (
+        let noteID = this.props.match.params.noteId
+        const selectedNote = this.props.notes.find(note => note.id === noteID)
+        const selectedFolder = this.props.folders.find(folder => folder.id === selectedNote.folderId)
+        const selectedFolderName = selectedFolder.name
+
+        return(
             <div>
-                <button type="button">
-                    Go Back
-                </button>
+                <Link to="">
+                    <p className="navBarTile" onClick={() => this.props.history.goBack()}>Go Back</p>
+                </Link>
+                <p>{selectedFolderName}</p>
             </div>
         )
     }
 }
 
-export default withRouter(GoBackButton)
+export default withRouter(MainNote)
