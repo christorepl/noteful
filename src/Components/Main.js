@@ -1,30 +1,41 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import NotefulContext from '../Context/NotefulContext'
 
-const Main = (props) => {
 
-    let folderID = props.match.params.folderId
+class Main extends React.Component {
+    static contextType = NotefulContext
+
+    static defaultProps = {
+        onDeleteNote: () => {},
+      }
+
+   render() { 
+    const folderID = this.props.match.params.folderId
 
     let notes = []
 
     if (folderID === undefined){
-        notes = props.notes
+        notes = this.context.notes
     } else {
-        notes = props.notes.filter(note => {
+        notes = this.context.notes.filter(note => {
             return (folderID === note.folderId)
         })
     }
 
+    const path = this.props.location.pathname
+
+
     const note = notes.map(note => {
         return (
             <div className="noteSelection" key={note.id}>
-                <Link to={`/note/${note.id}`}>
                     <li>
-                        <h1>{note.name}</h1>
+                        <Link to={`/note/${note.id}`}>
+                            <h1>{note.name}</h1>
+                        </Link>
                         <p>Last modified: {note.modified}</p>
-                        <button type="button">Don't click me yet</button>
+                        <button type="button" onClick={() => this.context.deleteNote(note.id, path)}>Delete</button>
                     </li>
-                </Link>
             </div>
         )
     })
@@ -35,6 +46,7 @@ const Main = (props) => {
         <button type="button">Add note</button>
         </div>
     )
+}
 }
 
 export default withRouter(Main)

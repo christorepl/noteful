@@ -1,12 +1,14 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import NotefulContext from '../Context/NotefulContext'
 
 class Folder extends React.Component {
+    static contextType = NotefulContext
     render(){
 
         let folderID = this.props.match.params.folderId
 
-        const folderNames = this.props.folders.map(folder => {
+        const folderNames = this.context.folders.map(folder => {
             return (
                 <div key={folder.id}>
                 <Link to={`/folder/${folder.id}`}>
