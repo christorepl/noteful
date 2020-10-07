@@ -2,6 +2,12 @@ li {
     list-style: none;
 }
 
+button {
+    margin-top: 10px;
+    margin-left: 25px;
+    color: blue;
+}
+
 .highlight {
     background: yellow;
     color: black;

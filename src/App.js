@@ -25,17 +25,28 @@ class App extends React.Component{
             this.setState({folders: foldersResponse.data })
     }
 
-    deleteNote (noteId, path) {
-        console.log(this.props)
+    deleteNote = (noteId) => {
         axios.delete(`${Noteful.URL}/notes/${noteId}`)
-        if (path === `/note/${noteId}`) {
-            this.props.history.goBack()
-        }
-        this.setState({notes: this.state.notes, folders: this.state.folders})
+        const notes = this.state.notes.filter(note => note.id !== noteId)
+        this.setState({ notes })
+    }
+
+    addFolder (e) {
+        e.preventDefault();
+        let folderName = e.target.folderName.value
+        axios({
+            method: 'post',
+            url: `${Noteful.URL}/folders/`,
+            headers: {'Content-Type': 'application/json'},
+            data: {
+                name: `${folderName}`
+            }
+        })
+        const folders = this.state.folders
+        this.setState({folders})
     }
 
     render(){
-        console.log(this.props.history)
         const value = {
             notes: this.state.notes,
             folders: this.state.folders,
