@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import NotefulContext from '../Context/NotefulContext'
+import AddNewFolder from './AddNewFolder'
 
 class Folder extends React.Component {
     static contextType = NotefulContext
@@ -23,7 +24,7 @@ class Folder extends React.Component {
     return(
         <div>
             {folderNames}
-            <button type="button">Add folder</button>
+            <AddNewFolder />
         </div>
     )
     }

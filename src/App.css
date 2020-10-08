@@ -2,6 +2,12 @@ li {
     list-style: none;
 }
 
+button {
+    margin-top: 10px;
+    margin-left: 25px;
+    color: blue;
+}
+
 .highlight {
     background: yellow;
     color: black;
@@ -38,13 +44,22 @@ li {
 }
 
 .noteSelection h1 {
+    margin-left: 20px;
     color: red
 }
 
 .noteSelection p {
-    color: purple;
+    margin-left: 20px;
+    color: purple
 }
 
 .noteSelection button {
-    color: green;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    color: green
+}
+
+form {
+    margin-left: 10px;
+    margin-top: 10px;
 }
