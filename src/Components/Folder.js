@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import NotefulContext from '../Context/NotefulContext'
+import AddNewFolder from './AddNewFolder'
 
 class Folder extends React.Component {
     static contextType = NotefulContext
@@ -23,10 +25,16 @@ class Folder extends React.Component {
     return(
         <div>
             {folderNames}
-            <button type="button">Add folder</button>
+            <AddNewFolder />
         </div>
     )
     }
+}
+
+Folder.propTypes = {
+        history: PropTypes.object.isRequired,
+        location: PropTypes.object.isRequired,
+        match: PropTypes.object.isRequired
 }
 
 export default withRouter(Folder)

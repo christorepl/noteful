@@ -1,9 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import NotefulContext from '../Context/NotefulContext'
 
 
-class MainNote extends React.Component {
+class GoBackButton extends React.Component {
     static contextType = NotefulContext
 
     render(){
@@ -21,4 +22,10 @@ class MainNote extends React.Component {
     }
 }
 
-export default withRouter(MainNote)
+GoBackButton.propTypes = {
+        history: PropTypes.object.isRequired,
+        location: PropTypes.object.isRequired,
+        match: PropTypes.object.isRequired
+}
+
+export default withRouter(GoBackButton)

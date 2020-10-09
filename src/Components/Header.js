@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 export default class Header extends React.Component {
     render() {
@@ -11,4 +12,10 @@ export default class Header extends React.Component {
             </nav>
         )
     }
+}
+
+Header.propTypes = {
+    history: PropTypes.object,
+    location: PropTypes.object,
+    match: PropTypes.object
 }

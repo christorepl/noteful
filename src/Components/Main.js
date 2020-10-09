@@ -1,14 +1,15 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import NotefulContext from '../Context/NotefulContext'
-
+import AddNewNote from './AddNewNote'
 
 class Main extends React.Component {
     static contextType = NotefulContext
 
     static defaultProps = {
         onDeleteNote: () => {},
-      }
+    }
 
    render() { 
     const folderID = this.props.match.params.folderId
@@ -23,9 +24,6 @@ class Main extends React.Component {
         })
     }
 
-    const path = this.props.location.pathname
-
-
     const note = notes.map(note => {
         return (
             <div className="noteSelection" key={note.id}>
@@ -34,7 +32,7 @@ class Main extends React.Component {
                             <h1>{note.name}</h1>
                         </Link>
                         <p>Last modified: {note.modified}</p>
-                        <button type="button" onClick={() => this.context.deleteNote(note.id, path)}>Delete</button>
+                        <button type="button" onClick={() => this.context.deleteNote(note.id)}>Delete</button>
                     </li>
             </div>
         )
@@ -43,10 +41,17 @@ class Main extends React.Component {
     return(
         <div>
         {note}
-        <button type="button">Add note</button>
+        <AddNewNote />
         </div>
     )
 }
 }
+
+Main.propTypes = {
+        history: PropTypes.object.isRequired,
+        location: PropTypes.object.isRequired,
+        match: PropTypes.object.isRequired
+}
+
 
 export default withRouter(Main)
