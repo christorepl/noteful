@@ -1,8 +1,7 @@
 import React from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { withRouter, Link, Route } from 'react-router-dom'
 import NotefulContext from '../Context/NotefulContext'
-
-
 
 class MainNote extends React.Component {
     static contextType = NotefulContext
@@ -11,8 +10,12 @@ class MainNote extends React.Component {
         onDeleteNote: () => {},
       }
 
-
     render(){
+        console.log(this.props)
+        MainNote.propTypes = {
+            route: React.PropTypes.instanceOf(Route).isRequired
+        }
+
         const noteId = this.props.match.params.noteId
         const selectedNote = this.context.notes.find(note => note.id === noteId)
    

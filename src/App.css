@@ -62,4 +62,6 @@ button {
 form {
     margin-left: 10px;
     margin-top: 10px;
+    border-style: inset;
+    padding: 10px;
 }

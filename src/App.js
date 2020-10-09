@@ -8,8 +8,10 @@ import Header from './Components/Header'
 import Main from './Components/Main'
 import MainNote from './Components/MainNote'
 import GoBackButton from './Components/GoBackButton'
-// import AddNewFolder from './Components/AddNewFolder'
+import AppErrors from './ErrorBoundaries/AppErrors'
 import './App.css'
+
+// validate route props [propType]
 
 class App extends React.Component{
     static contextType = NotefulContext
@@ -17,6 +19,11 @@ class App extends React.Component{
     state = {
         notes: [],
         folders: [],
+        err: '',
+        noteName: {
+            value: '',
+            touched: false
+        }    
     }
 
     async componentDidMount () {
@@ -48,11 +55,30 @@ class App extends React.Component{
             newFolder.name = res.data.name
             this.setState({folders: [...this.state.folders, newFolder]})
         })
+    }
 
+    clearError = () => {
+        this.setState({err: ''})
+    }
+
+    validateNoteName = (e) => {
+        e.preventDefault();
+        console.log('validation ran')
+        const noteName =  e.target.noteName.value.trim();
+        console.log(noteName, noteName.length)
+        if (noteName.length === 0) {
+            console.log('name is 0')
+            this.setState({err: 'Validation Error: You must provide a name for your new note.'})
+        } else {
+            console.log('note submitted')
+            this.clearError()
+            this.addNewNote(e)
+            this.setState({noteName: {value: noteName, touched: true}})
+        }
     }
 
     addNewNote = (e) => {
-        e.preventDefault();
+        console.log('addnote ran')
         let folder = e.target.noteFolder.value
         let content = e.target.noteContent.value
         let name = e.target.noteName.value
@@ -82,22 +108,23 @@ class App extends React.Component{
         const value = {
             notes: this.state.notes,
             folders: this.state.folders,
+            noteName: this.state.noteName,
+            err: this.state.err,
             deleteNote: this.deleteNote,
             addNewFolder: this.addNewFolder,
-            addNewNote: this.addNewNote
+            addNewNote: this.addNewNote,
+            validateNoteName: this.validateNoteName
         };
         return(
             <div className="App">
-                    <Route
-                        path="/"
-                        component={Header}
-                    />
+                <AppErrors>
+                    <Route path="/" component={Header}/>
                     <NotefulContext.Provider value={value}>
                         <div className="navFlex">
-                            <Route 
+                            <Route
                                 exact path="/"
                                 component={Folder}/>
-                            <Route 
+                            <Route
                                 exact path="/"
                                 component={Main}
                             />
@@ -109,7 +136,7 @@ class App extends React.Component{
                                 exact path="/folder/:folderId"
                                 component={Main}
                             />
-                            <Route 
+                            <Route
                                 exact path="/note/:noteId"
                                 component={GoBackButton}
                             />
@@ -119,7 +146,8 @@ class App extends React.Component{
                             />
                         </div>
                     </NotefulContext.Provider>
-                </div>
+                </AppErrors>
+            </div>
         )
     }
 }
