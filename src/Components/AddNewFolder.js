@@ -1,6 +1,5 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import NotefulContext from '../Context/NotefulContext'
 import FoldersErrors from '../ErrorBoundaries/FoldersErrors'
 
@@ -25,12 +24,5 @@ class AddNewFolder extends React.Component {
         )
     }
 }
-
-AddNewFolder.propTypes = {
-    history: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    match: PropTypes.object.isRequired
-}
-
 
 export default withRouter(AddNewFolder)

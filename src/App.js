@@ -11,8 +11,6 @@ import GoBackButton from './Components/GoBackButton'
 import AppErrors from './ErrorBoundaries/AppErrors'
 import './App.css'
 
-// validate route props [propType]
-
 class App extends React.Component{
     static contextType = NotefulContext
 
@@ -63,14 +61,10 @@ class App extends React.Component{
 
     validateNoteName = (e) => {
         e.preventDefault();
-        console.log('validation ran')
         const noteName =  e.target.noteName.value.trim();
-        console.log(noteName, noteName.length)
         if (noteName.length === 0) {
-            console.log('name is 0')
             this.setState({err: 'Validation Error: You must provide a name for your new note.'})
         } else {
-            console.log('note submitted')
             this.clearError()
             this.addNewNote(e)
             this.setState({noteName: {value: noteName, touched: true}})
@@ -78,7 +72,6 @@ class App extends React.Component{
     }
 
     addNewNote = (e) => {
-        console.log('addnote ran')
         let folder = e.target.noteFolder.value
         let content = e.target.noteContent.value
         let name = e.target.noteName.value
@@ -114,7 +107,8 @@ class App extends React.Component{
             addNewFolder: this.addNewFolder,
             addNewNote: this.addNewNote,
             validateNoteName: this.validateNoteName
-        };
+        }
+
         return(
             <div className="App">
                 <AppErrors>

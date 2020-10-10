@@ -15,7 +15,7 @@ class GoBackButton extends React.Component {
 
         return(
             <div>
-                <p className="navBarTile" onClick={() => this.props.history.goBack()}>Go Back</p>
+                <button className="navBarTile" onClick={() => this.props.history.goBack()}>Go Back</button>
                 <p>{selectedFolderName}</p>
             </div>
         )
